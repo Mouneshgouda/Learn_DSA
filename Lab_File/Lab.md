@@ -2,46 +2,57 @@ Implement Stack and its operations like push and pop
 # Push Operation
 ```c
 #include <stdio.h>
-#include <stdlib.h>
 
-#define MAX 100 // Maximum size of the stack
+void push();
+void display();
 
-// Define the stack structure
-typedef struct {
-    int items[MAX];
-    int top;
-} Stack;
-
-// Initialize the stack
-void initStack(Stack *s) {
-    s->top = -1;
-}
-
-// Check if the stack is full
-int isFull(Stack *s) {
-    return s->top == MAX - 1;
-}
-
-// Push an element onto the stack
-void push(Stack *s, int item) {
-    if (isFull(s)) {
-        printf("Stack overflow\n");
-        return;
-    }
-    s->items[++(s->top)] = item;
-    printf("%d pushed to stack\n", item);
-}
+int a[100], top = -1;
 
 int main() {
-    Stack s;
-    initStack(&s);
-
-    push(&s, 10);
-    push(&s, 20);
-    push(&s, 30);
-
+    int x;
+    while (1) {
+        printf("\n0 or CTRL-C to Exit ");
+        printf("\n1. Push");
+        printf("\n5. Display");
+        printf("\nEnter your choice? \n");
+        scanf("%d", &x);
+        switch (x) {
+            case 0:
+                return 0;
+            case 1:
+                push();
+                break;
+            case 5:
+                display();
+                break;
+            default:
+                printf("\nInvalid choice,\nPlease try again.\n");
+        }
+    }
     return 0;
 }
+
+// function for pushing the element
+void push() {
+    int n = 0;
+    printf("\nEnter the value to be inserted: ");
+    scanf("%d", &n);
+    top += 1;
+    a[top] = n;
+}
+
+// function to view entire stack
+void display() {
+    if (top == -1) {
+        printf("\nStack is empty");
+    } else {
+        printf("\nStack elements:\n");
+        for (int i = top; i >= 0; i--) {
+            printf("%d\n", a[i]);
+        }
+    }
+}
+
 ```
 # Push and Pop Operation
 
