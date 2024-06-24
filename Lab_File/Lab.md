@@ -1,4 +1,4 @@
-Implement Stack and its operations like push ,pop,peek,search,display
+### 1.Implement Stack and its operations like push ,pop,peek,search,display
 
 
 ```c
