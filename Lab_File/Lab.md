@@ -105,7 +105,7 @@ void display() {
     }
 }
 ```
-###Postfix Evaluation Algorithm
+### Postfix Evaluation Algorithm
 
 - Postfix Evaluation Algorithm
   Postfix evaluation algorithm is a simple algorithm that allows us to evaluate postfix expressions. The algorithm uses a stack to keep track of operands and 
@@ -120,7 +120,7 @@ void display() {
 - Example:
  Let's consider the expression "5 6 7 + * 8 -". We will evaluate this expression using the postfix evaluation algorithm.
 
-###Example:
+### Example:
 
 - Start scanning the expression from left to right.
 - Push operand 5 onto the stack.
