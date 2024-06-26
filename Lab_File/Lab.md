@@ -261,33 +261,6 @@ int main()
     return 0;
 }
 
-// Function to push an element onto the stack
-void push(int n)
-{
-    if (top < SIZE - 1) // Check if the stack is not full
-    {
-        stack[++top] = n; // Increment the top index and push the element
-    }
-    else
-    {
-        printf("Stack overflow!\n"); // Print error message if stack is full
-        exit(-1); // Exit the program with error code
-    }
-}
-
-// Function to pop an element from the stack
-int pop()
-{    
-    if (top > -1) // Check if the stack is not empty
-    {
-        return stack[top--]; // Return the top element and decrement the top index
-    }
-    else
-    {
-        printf("Stack underflow!\n"); // Print error message if stack is empty
-        exit(-1); // Exit the program with error code
-    }
-}
 
 
 ```
