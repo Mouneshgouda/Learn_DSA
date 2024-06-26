@@ -109,66 +109,74 @@ void display() {
 
 ```c
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 
-#define MAX 100 // Maximum size of the stack
+#define SIZE 40
 
-// Define the stack structure
-typedef struct {
-    int items[MAX];
-    int top;
-} Stack;
+char stack[SIZE];
+int top = -1;
 
-// Initialize the stack
-void initStack(Stack *s) {
-    s->top = -1;
+void push(char c) {
+    stack[++top] = c;
 }
 
-// Check if the stack is full
-int isFull(Stack *s) {
-    return s->top == MAX - 1;
+char pop() {
+    if (top == -1)
+        return '\0';
+    else
+        return stack[top--];
 }
 
-// Check if the stack is empty
-int isEmpty(Stack *s) {
-    return s->top == -1;
+int precedence(char op) {
+    if (op == '+' || op == '-')
+        return 1;
+    if (op == '*' || op == '/' || op == '%')
+        return 2;
+    return 0;
 }
 
-// Push an element onto the stack
-void push(Stack *s, int item) {
-    if (isFull(s)) {
-        printf("Stack overflow\n");
-        return;
+void infixToPostfix(char* infix, char* postfix) {
+    int i = 0, j = 0;
+    char ch, popped;
+
+    while ((ch = infix[i++]) != '\0') {
+        if (isdigit(ch)) {
+            postfix[j++] = ch;
+        }
+        else if (ch == '(') {
+            push(ch);
+        }
+        else if (ch == ')') {
+            while ((popped = pop()) != '(')
+                postfix[j++] = popped;
+        }
+        else {
+            while (top != -1 && precedence(stack[top]) >= precedence(ch))
+                postfix[j++] = pop();
+            push(ch);
+        }
     }
-    s->items[++(s->top)] = item;
-    printf("%d pushed to stack\n", item);
-}
 
-// Pop an element from the stack
-int pop(Stack *s) {
-    if (isEmpty(s)) {
-        printf("Stack underflow\n");
-        return -1;
-    }
-    return s->items[(s->top)--];
+    while (top != -1)
+        postfix[j++] = pop();
+
+    postfix[j] = '\0';
 }
 
 int main() {
-    Stack s;
-    initStack(&s);
+    char infix[SIZE], postfix[SIZE];
 
-    // Push elements onto the stack
-    push(&s, 10);
-    push(&s, 20);
-    push(&s, 30);
+    printf("Enter an infix expression: ");
+    scanf("%s", infix);
 
-    // Pop elements from the stack
-    printf("%d popped from stack\n", pop(&s));
-    printf("%d popped from stack\n", pop(&s));
-    printf("%d popped from stack\n", pop(&s));
+    infixToPostfix(infix, postfix);
+
+    printf("Postfix expression: %s\n", postfix);
 
     return 0;
 }
+
 ```
 
 # peek and Search
