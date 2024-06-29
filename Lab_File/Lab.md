@@ -189,6 +189,80 @@ void display() {
 https://github.com/Gurupatil0003/DSA_Tutorial/blob/master/Img/Evaluation-of-a-postfix-expression-using-a-stack.gif
 # Postfix Evalution
 ```c
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+#define SIZE 40 // Define the maximum size of the stack
+
+// Function prototypes
+int pop();
+void push(int);
+
+// Global variables
+char postfix[SIZE]; // Array to store the postfix expression
+int stack[SIZE]; // Stack array
+int top = -1; // Index of the top of the stack
+
+int main()
+{
+    int i, a, b, result;
+    char ch;
+
+    // Prompt the user to enter a postfix expression
+    printf("Enter a postfix expression: ");
+    scanf("%s", postfix); // Read the postfix expression, e.g., "89+9-8/"
+
+    // Process each character in the postfix expression
+    for(i = 0; postfix[i] != '\0'; i++)
+    {
+        ch = postfix[i]; // Get the current character
+
+        // If the character is a digit, push it onto the stack
+        if(isdigit(ch))
+        {
+            push(ch - '0'); // Convert char to int and push onto the stack
+        }
+        // If the character is an operator, pop two elements and apply the operator
+        else if(ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%')
+        {
+            b = pop(); // Pop the top element
+            a = pop(); // Pop the next top element
+
+            // Perform the operation based on the operator
+            switch(ch)
+            {
+                case '+': result = a + b; break;
+                case '-': result = a - b; break;
+                case '*': result = a * b; break;
+                case '/': result = a / b; break;
+                case '%': result = a % b; break;
+                default: 
+                    printf("Invalid operator encountered!\n");
+                    exit(-1);
+            }
+            
+            // Push the result back onto the stack
+            push(result);
+        }
+        else
+        {
+            printf("Invalid character encountered in expression!\n");
+            exit(-1);
+        }
+    }
+
+    // Pop the final result from the stack
+    result = pop();
+
+    // Print the result of the postfix evaluation
+    printf("The postfix evaluation is: %d\n", result);
+    
+    return 0;
+}
+
+
+
 
 
 
