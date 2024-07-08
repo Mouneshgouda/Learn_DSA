@@ -236,8 +236,7 @@ void display() {
 ### Peek Operation: O(1)
 - The time complexity of the Peek operation would be O(1) as in this operation, we are returning only the topmost element of the stack.
 
-### IsEmpty Operation: O(1)
-- The time complexity of the IsEmpty operation would be O(1) as in this operation, we are checking whether the topmost element is null or not.
+### IsEmpty Operation: O(1)- The time complexity of the IsEmpty operation would be O(1) as in this operation, we are checking whether the topmost element is null or not.
 
 ### IsFull Operation: O(1)
 - The time complexity of the IsFull operation would be O(1) as in this operation, we are checking whether the topmost element is at the maximum position or not.
@@ -260,7 +259,7 @@ void display() {
 ```c
 
 #include <stdio.h>
-#include <stdlib.h> // for dynamic memory allocation functions
+#include <stdlib.h>
 
 void push();
 void pop();
@@ -268,19 +267,18 @@ void peek();
 void search();
 void display();
 
-int *a; // pointer to dynamically allocated array
+int *a = NULL;
 int top = -1;
-int capacity = 1; // initial capacity of the stack
+int capacity = 2; // Initial capacity
 
 int main() {
-    int x;
-    a = (int *)malloc(capacity * sizeof(int)); // allocate memory for stack
-    
+    a = (int*)malloc(capacity * sizeof(int));
     if (a == NULL) {
-        printf("Memory allocation failed.");
-        return 1; // indicate failure
+        printf("Memory allocation failed\n");
+        return 1;
     }
-    
+
+    int x;
     while (1) {
         printf("\n0 or CTRL-C to Exit ");
         printf("\n1. Push");
@@ -292,7 +290,7 @@ int main() {
         scanf("%d", &x);
         switch (x) {
             case 0:
-                free(a); // free dynamically allocated memory
+                free(a); // Free the allocated memory before exiting
                 return 0;
             case 1:
                 push();
@@ -313,29 +311,28 @@ int main() {
                 printf("\nInvalid choice,\nPlease try again.\n");
         }
     }
-    
-    free(a); // free dynamically allocated memory
     return 0;
 }
 
 // function for pushing the element
 void push() {
-    int n = 0;
+    int n;
     printf("\nEnter the value to be inserted: ");
     scanf("%d", &n);
-    top += 1;
     
-    // check if stack is full, if yes, reallocate memory
-    if (top == capacity) {
-        capacity *= 2; // double the capacity
-        a = (int *)realloc(a, capacity * sizeof(int));
-        if (a == NULL) {
-            printf("Memory reallocation failed.");
-            exit(1); // exit the program
+    // Check if the capacity needs to be increased
+    if (top == capacity - 1) {
+        capacity *= 2;
+        int *temp = realloc(a, capacity * sizeof(int));
+        if (temp == NULL) {
+            printf("\nMemory allocation failed");
+            free(a); // Free the existing memory before exiting
+            exit(1);
         }
+        a = temp;
     }
     
-    a[top] = n;
+    a[++top] = n;
 }
 
 // function for popping the element out
@@ -343,20 +340,8 @@ void pop() {
     if (top == -1) {
         printf("\nStack is empty");
     } else {
-        int item;
-        item = a[top];
-        top -= 1;
-        printf("\nPopped item is %d ", item);
-        
-        // check if stack size is too large, reduce capacity if necessary
-        if (top + 1 <= capacity / 2) {
-            capacity /= 2; // halve the capacity
-            a = (int *)realloc(a, capacity * sizeof(int));
-            if (a == NULL) {
-                printf("Memory reallocation failed.");
-                exit(1); // exit the program
-            }
-        }
+        int item = a[top--];
+        printf("\nPopped item is %d", item);
     }
 }
 
@@ -397,7 +382,122 @@ void display() {
 }
 
 
+
 ```
+
+### Initial Setup
+- Initial Memory Allocation:
+- The initial capacity of the stack is set to 2.
+- malloc allocates memory for 2 integers: a = (int*)malloc(capacity * sizeof(int));
+- At this point, the memory allocated can hold 2 integers.
+~~~c
+capacity = 2;
+top = -1;
+a = [_, _]  // memory for 2 integers
+~~~
+
+### Pushing Elements
+- Push 1st Element:
+- Value: 10
+- The top index is incremented from -1 to 0.
+- The element is stored at index 0.
+~~~c
+top = 0;
+a = [10, _]
+
+~~~
+### Push 2nd Element:
+- Value: 20
+- The top index is incremented from 0 to 1.
+- The element is stored at index 1.
+~~~c
+top = 1;
+a = [10, 20]
+~~~
+### Push 3rd Element:
+Value: 30
+- The top index is incremented from 1 to 2.
+- The current capacity is 2 and top index is now equal to capacity - 1.
+- realloc is called to double the capacity to 4.
+- Memory is reallocated to hold 4 integers.
+- The element is stored at index 2
+~~~c
+capacity = 4;
+top = 2;
+a = [10, 20, 30, _]  // memory for 4 integers
+~~~
+### Push 4th Element:
+- Value: 40
+- The top index is incremented from 2 to 3.
+- The element is stored at index 3
+~~~c
+top = 3;
+a = [10, 20, 30, 40]
+~~~
+### Push 5th Element:
+- Value: 50
+- The top index is incremented from 3 to 4.
+- The current capacity is 4 and top index is now equal to capacity - 1.
+- realloc is called to double the capacity to 8.
+- Memory is reallocated to hold 8 integers.
+- The element is stored at index 4
+~~~c
+capacity = 8;
+top = 4;
+a = [10, 20, 30, 40, 50, _, _, _]  // memory for 8 integers
+~~~
+
+
+
+
+### Reloc calculation how much block or byte it create
+
+-To understand how realloc dynamically adjusts the memory allocation for the stack, let's go through the calculations    of memory blocks or bytes created during the process.
+
+- Initial Setup
+- Initial Memory Allocation:
+~~~c
+Initial capacity: 2
+Each integer typically requires 4 bytes.
+Initial memory allocated: capacity * sizeof(int) = 2 * 4 bytes = 8 bytes.
+Dynamic Resizing
+When we use realloc, the memory allocation follows this pattern: every time the stack is full, the capacity doubles.
+
+Push Operations and Resizing
+Initial Allocation:
+
+capacity = 2
+Memory allocated: 2 * sizeof(int) = 2 * 4 bytes = 8 bytes
+a = [_, _] (8 bytes allocated)
+Push 1st Element (10):
+
+No resizing needed.
+Memory remains 8 bytes.
+Push 2nd Element (20):
+
+No resizing needed.
+Memory remains 8 bytes.
+Push 3rd Element (30):
+
+Stack is full. top is 1, capacity - 1 is 1.
+Capacity doubles from 2 to 4.
+realloc increases the memory:
+New capacity: 4
+Memory allocated: 4 * sizeof(int) = 4 * 4 bytes = 16 bytes
+a = [10, 20, 30, _] (16 bytes allocated)
+Push 4th Element (40):
+
+No resizing needed.
+Memory remains 16 bytes.
+Push 5th Element (50):
+
+Stack is full. top is 3, capacity - 1 is 3.
+Capacity doubles from 4 to 8.
+realloc increases the memory:
+New capacity: 8
+Memory allocated: 8 * sizeof(int) = 8 * 4 bytes = 32 bytes
+a = [10, 20, 30, 40, 50, _, _, _] (32 bytes allocated)
+~~~
 ### Stack Applications: Polish notation, Infix to postfix conversion, evaluation of postfix expression.
 
 - Stacks are crucial in solving various problems, including arithmetic expression evaluation and conversion between different notations like infix, postfix, and 
@@ -557,6 +657,9 @@ int main() {
   implementations of some common recursive algorithms:
 
 ### How recursion works?
+
+![image](https://github.com/Gurupatil0003/DSA_Tutorial/assets/110026505/1d67bb51-f2d5-4bb8-b386-583faac10704)
+
 ```c
 void recurse()
 {
@@ -612,28 +715,46 @@ int main() {
     return 0;
 }
 ```
+![image](https://github.com/Gurupatil0003/DSA_Tutorial/assets/110026505/2a4305f6-6d8a-4d69-af3c-fae9fe5bd45b)
+
 # Fibonacci Sequence
 - The Fibonacci sequence is a series of numbers in which each number is the sum of the two preceding ones, usually starting with 0 and 1.
 ```c
 #include <stdio.h>
 
-// Recursive function to calculate Fibonacci number
-int fibonacci(int n) {
-    if (n <= 1)
-        return n;
-    else
-        return fibonacci(n - 1) + fibonacci(n - 2);
-}
+// Function declaration
+int fib(int);
 
+// Main function
 int main() {
-    int n = 7;
-    printf("Fibonacci sequence up to %d terms: ", n);
-    for (int i = 0; i < n; i++) {
-        printf("%d ", fibonacci(i));
+    int i, n;
+    
+    printf("Enter the number of terms in Fibonacci series: ");
+    scanf("%d", &n);
+    
+    printf("First %d numbers in Fibonacci series: ", n);
+    for (i = 0; i < n; i++) {
+        printf("%d ", fib(i));
     }
-    printf("\n");
+    
+    // Wait for user to press Enter before exiting
+    printf("\nPress Enter to exit...");
+    getchar(); // Wait for a character input (Enter key)
+    
     return 0;
 }
+
+// Recursive function to calculate Fibonacci number
+int fib(int x) {
+    if (x == 0) {
+        return 0;
+    } else if (x == 1) {
+        return 1;
+    } else {
+        return (fib(x - 1) + fib(x - 2));
+    }
+}
+
 ```
 
 ## Tower of Hanoi
