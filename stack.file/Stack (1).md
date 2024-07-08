@@ -615,6 +615,7 @@ int main() {
 - Although stack is a simple data structure to implement, it is very powerful. The most common uses of a stack are:
 
 - To reverse a word - Put all the letters in a stack and pop them out. Because of the LIFO order of stack, you will get the letters in reverse order.
+
  
 - In compilers - Compilers use the stack to calculate the value of expressions like 2 + 4 / 5 * (7 - 9) by converting the expression to prefix or postfix form.
  In browsers - The back button in a browser saves all the URLs you have visited previously in a stack. Each time you visit a new page, it is added on top of the stack. When you press the back button, the current 
@@ -760,6 +761,34 @@ int fib(int x) {
 ## Tower of Hanoi
 - The Tower of Hanoi is a mathematical puzzle where you have three pegs and a number of disks of different sizes which can be slid onto any peg. The puzzle starts 
  with the disks in a neat stack in ascending order of size on one peg, the smallest at the top.
+
+![image](https://github.com/Gurupatil0003/DSA_Tutorial/assets/110026505/5d18f4b8-7c22-4c7f-a25d-1ba5f9b777d8)
+
+- Before getting started, let’s talk about what the Tower of Hanoi problem is. Well, this is a fun puzzle game where the objective is to move an entire stack of 
+ disks from the source position to another position. Three simple rules are followed:
+
+- Only one disk can be moved at a time.
+ Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack. In other words, a disk can only be moved if it is the 
+ uppermost disk on a stack.
+- No larger disk may be placed on top of a smaller disk.
+ Now, let’s try to imagine a scenario. Suppose we have a stack of three disks. Our job is to move this stack from source A to destination C. How do we do this?
+
+- Before we can get there, let’s imagine there is an intermediate point B.
+
+- We can use B as a helper to finish this job. We are now ready to move on. Let’s go through each of the steps:
+
+- Move the first disk from A to C
+- Move the first disk from A to B
+- Move the first disk from C to B
+- Move the first disk from A to C
+- Move the first disk from B to A
+- Move the first disk from B to C
+- Move the first disk from A to C
+- Boom! We have solved our problem.
+
+![image](https://github.com/Gurupatil0003/DSA_Tutorial/assets/110026505/ba2d872c-b01c-4ba8-a034-19aca4d2dcc2)
+
+
 ```c
 #include <stdio.h>
 
