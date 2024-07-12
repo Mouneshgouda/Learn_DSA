@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musix-Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9ca3a45960.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+            <nav>
+                <div class="circle">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="circle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+            <img src="song2.jpeg" alt="" class="song-img" id="song-img">
+            <h1 id="song-title">Adam</h1>
+            <p id="song-artist">Zhurek</p>
+
+            <audio id="song">
+                <source src="musix.mp3" type="audio/mpeg">
+            </audio>
+            <input type="range" value="0" id="progress">
+
+            <div class="controls">
+                <div onclick="prevSong()"><i class="fa-solid fa-backward"></i></div>
+                <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+                <div onclick="nextSong()"><i class="fa-solid fa-forward"></i></div>
+            </div>
+
+            <div id="song-list">
+                <ul id="playlist">
+                    <!-- Dynamic songs will be added here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Linked list implementation
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        class LinkedList {
+            constructor() {
+                this.head = null;
+                this.tail = null;
+                this.size = 0;
+            }
+
+            add(data) {
+                const newNode = new Node(data);
+                if (!this.head) {
+                    this.head = newNode;
+                    this.tail = newNode;
+                } else {
+                    this.tail.next = newNode;
+                    this.tail = newNode;
+                }
+                this.size++;
+            }
+
+            get(index) {
+                if (index < 0 || index >= this.size) {
+                    return null;
+                }
+
+                let current = this.head;
+                let count = 0;
+
+                while (current) {
+                    if (count === index) {
+                        return current.data;
+                    }
+                    count++;
+                    current = current.next;
+                }
+
+                return null;
+            }
+
+            isEmpty() {
+                return this.size === 0;
+            }
+        }
+
+        // Initialize playlist
+        const playlist = new LinkedList();
+
+        // Sample songs
+        const songs = [
+            { title: 'Mudhal Nee Mudivum Nee', artist: 'Artist 1', src: 'mp3', img: 'song1.jpeg' },
+            { title: 'Song 2', artist: 'Artist 2', src: 'mp3', img: 'song2.jpeg' },
+            { title: 'Song 3', artist: 'Artist 3', src: 'song3.mp3', img: 'song3.jpeg' }
+        ];
+
+        // Populate playlist and create list items
+        songs.forEach((song, index) => {
+            playlist.add(song);
+            const li = document.createElement('li');
+            li.textContent = `${song.title} - ${song.artist}`;
+            li.onclick = () => loadSong(index); // Load song on click
+            document.getElementById('playlist').appendChild(li);
+        });
+
+        // Player controls
+        let currentSongIndex = 0;
+        let song = document.getElementById('song');
+        let progress = document.getElementById('progress');
+        let ctrlIcon = document.getElementById('ctrlIcon');
+        let songTitle = document.getElementById('song-title');
+        let songArtist = document.getElementById('song-artist');
+        let songImg = document.getElementById('song-img');
+
+        function loadSong(index) {
+            currentSongIndex = index;
+            const selectedSong = playlist.get(index);
+            if (selectedSong) {
+                songTitle.textContent = selectedSong.title;
+                songArtist.textContent = selectedSong.artist;
+                songImg.src = selectedSong.img;
+                song.src = selectedSong.src;
+                song.play();
+                ctrlIcon.classList.add('fa-pause');
+                ctrlIcon.classList.remove('fa-play');
+            }
+        }
+
+        song.onloadedmetadata = function() {
+            progress.max = song.duration;
+            progress.value = song.currentTime;
+        }
+
+        function playPause() {
+            if (ctrlIcon.classList.contains('fa-pause')) {
+                song.pause();
+                ctrlIcon.classList.remove('fa-pause');
+                ctrlIcon.classList.add('fa-play');
+            } else {
+                song.play();
+                ctrlIcon.classList.add('fa-pause');
+                ctrlIcon.classList.remove('fa-play');
+            }
+        }
+
+        song.addEventListener('timeupdate', function() {
+            progress.value = song.currentTime;
+        });
+
+        progress.oninput = function() {
+            song.currentTime = progress.value;
+        };
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex > 0) ? currentSongIndex - 1 : playlist.size - 1;
+            loadSong(currentSongIndex);
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex < playlist.size - 1) ? currentSongIndex + 1 : 0;
+            loadSong(currentSongIndex);
+        }
+
+        // Initial load
+        loadSong(currentSongIndex);
+    </script>
+</body>
+</html>
