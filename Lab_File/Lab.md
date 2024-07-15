@@ -347,6 +347,7 @@ int main() {
     return 0;                         // Exit program
 }
 ```
+```c
 
 #include <stdio.h>
 #include <stdlib.h> // header for using exit and return function
@@ -422,7 +423,7 @@ int dequeue() {
     front = front + 1;
     return num;
 }
-
+```
 
 
 
