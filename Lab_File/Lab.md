@@ -347,3 +347,186 @@ int main() {
     return 0;                         // Exit program
 }
 ```
+
+#include <stdio.h>
+#include <stdlib.h> // header for using exit and return function
+
+#define max 5 // symbolic constant
+
+int rear = -1, front = -1; // global variables
+int queue[max];
+
+void enqueue();
+int dequeue();
+void display();
+void search();
+
+int main() {
+    int w, num;
+    while (1) {
+        printf("\n1. enqueue");
+        printf("\n2. dequeue");
+        printf("\n3. Display");
+        printf("\n4. Search");
+        printf("\n5. EXIT");
+        printf("\nEnter What you want: ");
+        scanf("%d", &w);
+        switch (w) {
+            case 1:
+                enqueue();
+                break;
+            case 2:
+                num = dequeue();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                search();
+                break;
+            case 5:
+                exit(1);
+            default:
+                printf("\nInvalid Choice!!");
+        }
+    }
+
+    return 0;
+}
+
+void enqueue() {
+    int num;
+    if (rear == max - 1) {
+        printf("\nQueue is Full!\n");
+        return;
+    }
+    printf("\nEnter a number to insert: ");
+    scanf("%d", &num);
+    
+    if (front == -1) {
+        front = 0;  // Adjust front only if the queue is initially empty
+    }
+    
+    rear = rear + 1;
+    queue[rear] = num;
+}
+
+int dequeue() {
+    int num;
+    if (front == -1 || front == rear + 1) {
+        printf("\nQueue is Empty!\n");
+        return 0;
+    }
+    num = queue[front];
+    printf("\n%d was deleted!\n", num);
+    front = front + 1;
+    return num;
+}
+
+
+
+
+```c
+#include <stdio.h>
+#include <stdlib.h> // for exit()
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* rear = NULL;
+struct Node* front = NULL;
+
+void enqueue(int num);
+int dequeue();
+void display();
+void search();
+
+int main() {
+    int w, num;
+    while (1) {
+        printf("\n1. Enqueue");
+        printf("\n2. Dequeue");
+        printf("\n3. Display");
+        printf("\n4. Search");
+        printf("\n5. EXIT");
+        printf("\nEnter your choice: ");
+        scanf("%d", &w);
+        switch (w) {
+            case 1:
+                printf("\nEnter a number to insert: ");
+                scanf("%d", &num);
+                enqueue(num);
+                break;
+            case 2:
+                num = dequeue();
+                if (num != -1) {
+                    printf("\n%d was deleted!\n", num);
+                }
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                search();
+                break;
+            case 5:
+                exit(0);
+            default:
+                printf("\nInvalid Choice!!\n");
+        }
+    }
+
+    return 0;
+}
+
+void enqueue(int num) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = num;
+    newNode->next = NULL;
+    
+    if (rear == NULL) {
+        rear = newNode;
+        front = newNode;
+    } else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+}
+
+int dequeue() {
+    if (front == NULL) {
+        printf("\nQueue is Empty!\n");
+        return -1;
+    }
+    
+    int num = front->data;
+    struct Node* temp = front;
+    front = front->next;
+    free(temp);
+    
+    if (front == NULL) {
+        rear = NULL; // Reset rear when queue becomes empty
+    }
+    
+    return num;
+}
+
+void display() {
+    if (front == NULL) {
+        printf("\nQueue is Empty! Nothing to display!\n");
+        return;
+    }
+    
+    printf("\nQueue elements:\n");
+    struct Node* current = front;
+    while (current != NULL) {
+        printf("%d\t", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+
+```
