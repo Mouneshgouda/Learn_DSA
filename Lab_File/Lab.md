@@ -685,5 +685,113 @@ int main() {
     return 0;
 }
 ```
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
+// Define the structure of a Node
+struct Node {
+    int data; // The data part of the node
+    struct Node *next; // Pointer to the next node in the list
+};
+
+// Function to insert a node at the beginning of the linked list
+void insertStart(struct Node **head, int data) {
+    // Allocate memory for the new node
+    struct Node *newNode = (struct Node *) malloc(sizeof(struct Node));
+    newNode->data = data; // Assign data to the new node
+    newNode->next = *head; // Point the new node to the current head
+    *head = newNode; // Update the head to point to the new node
+}
+
+// Function to delete a node with a specific key
+
+
+// Function to search for a node with a specific key
+int searchNode(struct Node *head, int key) {
+    struct Node *current = head; // Initialize current pointer to head
+    while (current != NULL) { // Traverse the list until the end
+        if (current->data == key) // If key is found
+            return 1; // Return 1 indicating key is found
+        current = current->next; // Move to the next node
+    }
+    return 0; // Return 0 indicating key is not found
+}
+
+// Function to display the linked list
+void display(struct Node *node) {
+    while (node != NULL) { // Traverse the list until the end
+        printf("%d ", node->data); // Print the data of the current node
+        node = node->next; // Move to the next node
+    }
+    printf("\n");
+}
+
+// Function to initialize and build the linked list
+struct Node* buildLinkedList() {
+    struct Node *head = NULL; // Initialize head pointer
+    struct Node *node2 = NULL; // Initialize node2 pointer
+    struct Node *node3 = NULL; // Initialize node3 pointer
+    struct Node *node4 = NULL; // Initialize node4 pointer
+
+    // Allocate memory for the nodes
+    head = (struct Node *) malloc(sizeof(struct Node));
+    node2 = (struct Node *) malloc(sizeof(struct Node));
+    node3 = (struct Node *) malloc(sizeof(struct Node));
+    node4 = (struct Node *) malloc(sizeof(struct Node));
+
+    // Assign data to the nodes and link them
+    head->data = 15; // Data for head node
+    head->next = node2; // Link head to node2
+
+    node2->data = 10; // Data for node2
+    node2->next = node3; // Link node2 to node3
+
+    node3->data = 12; // Data for node3
+    node3->next = node4; // Link node3 to node4
+
+    node4->data = 3; // Data for node4
+    node4->next = NULL; // Last node, so next is NULL
+
+    return head; // Return the head of the constructed list
+}
+
+int main() {
+    struct Node *head = NULL; // Initialize head pointer
+
+    // Build the linked list
+    head = buildLinkedList();
+
+    // Display the initial linked list
+    printf("Linklist: ");
+    display(head);
+
+    // Insert a new node at the beginning
+    insertStart(&head, 25);
+
+    // Display the linked list after insertion
+    printf("\nAfter Inserting Element\n");
+    printf("Linklist: ");
+    display(head);
+
+   
+
+    // Search for a node with the data value 12
+    int key = 12;
+    if (searchNode(head, key))
+        printf("\nElement %d found in the list.\n", key);
+    else
+        printf("\nElement %d not found in the list.\n", key);
+
+    // Search for a node with the data value 10
+    key = 10;
+    if (searchNode(head, key))
+        printf("Element %d found in the list.\n", key);
+    else
+        printf("Element %d not found in the list.\n", key);
+
+    return 0;
+}
+
+```
 
