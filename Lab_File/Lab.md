@@ -347,3 +347,141 @@ int main() {
     return 0;
 }
 ```
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure of a Node for doubly linked list
+struct Node {
+    int data; // The data part of the node
+    struct Node *prev; // Pointer to the previous node in the list
+    struct Node *next; // Pointer to the next node in the list
+};
+
+// Function to insert a node at the beginning of the doubly linked list
+void insertStart(struct Node **head, int data) {
+    // Allocate memory for the new node
+    struct Node *newNode = (struct Node *) malloc(sizeof(struct Node));
+    newNode->data = data; // Assign data to the new node
+    newNode->prev = NULL; // Previous of new node is NULL
+    newNode->next = *head; // Next of new node is current head
+
+    if (*head != NULL)
+        (*head)->prev = newNode; // Previous of current head is new node
+
+    *head = newNode; // Update the head to point to the new node
+}
+
+// Function to delete a node with a specific key from doubly linked list
+void deleteNode(struct Node **head, int key) {
+    struct Node *temp = *head; // Temporary pointer to traverse the list
+
+    // Find the node with the key to be deleted
+    while (temp != NULL && temp->data != key) {
+        temp = temp->next;
+    }
+
+    // If key was not found
+    if (temp == NULL)
+        return;
+
+    // Adjust pointers for the node to be deleted
+    if (temp->prev != NULL)
+        temp->prev->next = temp->next;
+    if (temp->next != NULL)
+        temp->next->prev = temp->prev;
+
+    // Update head if the node to be deleted is the head
+    if (temp == *head)
+        *head = temp->next;
+
+    free(temp); // Free memory of the deleted node
+}
+
+// Function to search for a node with a specific key in doubly linked list
+int searchNode(struct Node *head, int key) {
+    struct Node *current = head; // Initialize current pointer to head
+    while (current != NULL) { // Traverse the list until the end
+        if (current->data == key) // If key is found
+            return 1; // Return 1 indicating key is found
+        current = current->next; // Move to the next node
+    }
+    return 0; // Return 0 indicating key is not found
+}
+
+// Function to reverse the doubly linked list
+void reverseList(struct Node **head) {
+    struct Node *temp = NULL;
+    struct Node *current = *head;
+
+    // Swap next and prev pointers for all nodes of the doubly linked list
+    while (current != NULL) {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev; // Move to the next node
+    }
+
+    // Check if list is not empty and update head
+    if (temp != NULL)
+        *head = temp->prev;
+}
+
+// Function to display the doubly linked list
+void display(struct Node *node) {
+    struct Node *last = NULL;
+    printf("\nForward Traversal: ");
+    while (node != NULL) { // Traverse the list until the end
+        printf("%d ", node->data); // Print the data of the current node
+        last = node;
+        node = node->next; // Move to the next node
+    }
+
+    printf("\nBackward Traversal: ");
+    while (last != NULL) { // Traverse the list backwards
+        printf("%d ", last->data); // Print the data of the current node
+        last = last->prev; // Move to the previous node
+    }
+    printf("\n");
+}
+
+int main() {
+    struct Node *head = NULL; // Initialize head pointer
+
+    // Insert nodes at the beginning of the doubly linked list
+    insertStart(&head, 15);
+    insertStart(&head, 10);
+    insertStart(&head, 12);
+    insertStart(&head, 3);
+
+    // Display the doubly linked list
+    printf("Initial Doubly Linked List:");
+    display(head);
+
+    // Delete a node with the data value 10
+    deleteNode(&head, 10);
+    printf("\nAfter Deleting Element 10:\n");
+    display(head);
+
+    // Reverse the doubly linked list
+    reverseList(&head);
+    printf("\nAfter Reversing the List:\n");
+    display(head);
+
+    // Search for a node with the data value 12
+    int key = 12;
+    if (searchNode(head, key))
+        printf("\nElement %d found in the list.\n", key);
+    else
+        printf("\nElement %d not found in the list.\n", key);
+
+    // Search for a node with the data value 10
+    key = 10;
+    if (searchNode(head, key))
+        printf("Element %d found in the list.\n", key);
+    else
+        printf("Element %d not found in the list.\n", key);
+
+    return 0;
+}
+```
