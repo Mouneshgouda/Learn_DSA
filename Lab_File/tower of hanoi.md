@@ -119,7 +119,7 @@ void towerOfHanoi(int n, Stack* src, Stack* dest, Stack* aux, char s, char d, ch
 }
 
 int main() {
-    int n = 3; // Number of disks
+    int n = 2; // Number of disks
     Stack src, dest, aux;
 
     initStack(&src);
