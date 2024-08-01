@@ -31,7 +31,7 @@
 - One-way Threaded Binary Tree
 - Two-way Threaded Binary Tree
 
-- 1. One-way Threaded Binary Tree 
+### 1. One-way Threaded Binary Tree 
  In this type, if a node has a right null pointer, then this right pointer is threaded towards the in-order successor’s node if it exists. 
 
 - The following diagram depicts an example of a Single-Threaded Binary Tree. Dotted lines represent threads.
