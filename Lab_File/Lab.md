@@ -859,7 +859,124 @@ int main() {
     return 0;
 }
 ```
+
+BST With Creating Insertation Deletation Traversal 
 ```c
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of a TreeNode
+typedef struct TreeNode {
+    int value;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+// Function to create a new node
+TreeNode* createNode(int value) {
+    TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
+    if (newNode == NULL) {
+        printf("Error allocating memory\n");
+        exit(1);
+    }
+    newNode->value = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a value into the BST
+TreeNode* insert(TreeNode* root, int value) {
+    if (root == NULL) {
+        return createNode(value);
+    }
+    if (value < root->value) {
+        root->left = insert(root->left, value);
+    } else {
+        root->right = insert(root->right, value);
+    }
+    return root;
+}
+
+// Function to delete a node from the BST
+TreeNode* deleteNode(TreeNode* root, int value) {
+    if (root == NULL) {
+        return root;
+    }
+
+    // Traverse the tree to find the node to delete
+    if (value < root->value) {
+        root->left = deleteNode(root->left, value);
+    } else if (value > root->value) {
+        root->right = deleteNode(root->right, value);
+    } else {
+        // Node with only one child or no child
+        if (root->left == NULL) {
+            TreeNode* temp = root->right;
+            free(root);
+            return temp;
+        } else if (root->right == NULL) {
+            TreeNode* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        // Node with two children: Find the minimum value node in the right subtree
+        TreeNode* temp = root->right;
+        while (temp && temp->left != NULL) {
+            temp = temp->left;
+        }
+
+        // Copy the inorder successor's content to this node
+        root->value = temp->value;
+
+        // Delete the inorder successor
+        root->right = deleteNode(root->right, temp->value);
+    }
+    return root;
+}
+
+// Function to perform in-order traversal
+void inorderTraversal(TreeNode* root) {
+    if (root != NULL) {
+        inorderTraversal(root->left);
+        printf("%d ", root->value);
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    TreeNode* root = NULL;
+
+    // Inserting values into the BST
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 70);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 60);
+    insert(root, 80);
+
+    // Performing in-order traversal
+    printf("In-order traversal before deletion: ");
+    inorderTraversal(root);
+    printf("\n");
+
+    // Deleting a node
+    root = deleteNode(root, 70);
+
+    // Performing in-order traversal after deletion
+    printf("In-order traversal after deletion of 70: ");
+    inorderTraversal(root);
+    printf("\n");
+
+    // Note: You will need to manually free the tree memory or use a different approach 
+    // to handle memory management without the `freeTree` function.
+
+    return 0;
+}
 
 
 ```
