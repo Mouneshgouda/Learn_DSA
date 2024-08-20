@@ -1,3 +1,5 @@
+# Avl Tree
+
 ![image](https://github.com/user-attachments/assets/7934b4a9-9af6-4d3b-b792-996e68591e74)
 
 - A binary search tree is balanced if any two sibling subtrees do not differ in height by more than one level. In other words, any two leaves should not have a 
@@ -118,7 +120,7 @@ In the image shown here, a left rotation is performed on an unbalanced tree, wit
  structures are smart and flexible enough to rebalance themselves and handle whatever we throw their way! And for that, I am deeply grateful that someone else was 
  around to ask these tough questions (and come up with an elegant solution) over half a century ago, before you or I even could.
 
-#Avl Tree Operations:
+# Avl Tree Operations:
 
 https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
