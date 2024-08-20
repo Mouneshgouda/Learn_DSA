@@ -84,10 +84,10 @@
 
 # Single rotations:
 - Single rotations are by far the simplest way to rebalance an unbalanced tree. There are two types of single rotations: a left rotation and a right rotation. A - 
- left rotation is useful if a node is inserted into the right subtree of another, higher up node’s right subtree, and that insertion or a deletion causes a tree to 
- become unbalanced.
+ left rotation is useful if a node is inserted into the right subtree of another, higher up node’s right subtree, and that insertion or a deletion causes a tree to  become unbalanced.
 
-In the image shown here, a left rotation is performed on an unbalanced tree, with a root node of 1, and a right subtree with a node of 2, with its own right subtree/node of 3.
+- In the image shown here, a left rotation is performed on an unbalanced tree, with a root node of 1, and a right subtree with a node of 2, with its own right 
+ subtree/node of 3.
 
 ![image](https://github.com/user-attachments/assets/ac34dd4d-1e84-448c-9b9d-2b159a3e6e36)
 
