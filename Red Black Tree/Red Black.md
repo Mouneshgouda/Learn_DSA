@@ -111,7 +111,7 @@ the subtrees of a larger red-black tree, which can also be helpful in preventing
 
 - And, most important of all, no rules are violated, and we have a perfectly-balanced red-black tree!
 
-  Operation Red Black Tree:
+ # Operation Red Black Tree:
 
   https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
 
