@@ -10,43 +10,43 @@
 ![image](https://github.com/user-attachments/assets/64d2ce9e-ecf0-44c9-969c-19dcce46f339)
 
 # Graph Terminology:
-Path:
+### Path:
 - A path can be defined as the sequence of nodes that are followed in order 
  to reach some terminal node V from the initial node U.
 
 ![image](https://github.com/user-attachments/assets/d292a00d-ade2-477f-932f-4b0ee803a4ed)
 
-Closed Path:
+### Closed Path:
 - A path will be called as closed path if the initial node is same as terminal 
  node. A path will be closed path if V0=VN.
 
 ![image](https://github.com/user-attachments/assets/fb4cd6fd-76da-4564-93b0-58911bd84f6c)
 
-Simple Path:
+### Simple Path:
 - If all the nodes of the graph are distinct with an exception V0=VN, 
  then such path P is called as closed simple path.
 
 ![image](https://github.com/user-attachments/assets/79fa5ac2-d309-4271-910c-dcd6cb98d97c)
 
-Cycle:
+### Cycle:
 - A cycle can be defined as the path which has no repeated edges or vertices 
  except the first and last vertices.
 ![image](https://github.com/user-attachments/assets/eca8f561-e969-4db0-8b4d-f62f6feaa813)
 
 # Types Of Graphs:
-- 1. Null Graph
+1. Null Graph
 -  A graph is known as a null graph if there are no edges in the 
  graph.
 
 ![image](https://github.com/user-attachments/assets/71ce8811-e315-4336-b91f-58f3a44853a9)
 
-- 2. Trivial Graph:
+2. Trivial Graph:
 -Graph having only a single vertex, it is also the smallest graph 
  possible.
 
 ![image](https://github.com/user-attachments/assets/0d04e279-966d-4055-bb02-6c44f812329a)
 
-- 3. Undirected Graph
+3. Undirected Graph
 - A graph in which edges do not have any direction. That 
  is the nodes are unordered pairs in the definition of every edge.
 ![image](https://github.com/user-attachments/assets/481e4c2b-f0ff-4ada-8f69-8b66c62a538e)
