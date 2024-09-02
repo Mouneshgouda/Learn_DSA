@@ -91,8 +91,8 @@ graph.
 ![image](https://github.com/user-attachments/assets/05260310-96d2-4e83-85a3-31ed32aad0c9)
 
 ### 11. Directed Acyclic Graph:
-- A Directed Graph that does not contain any 
-cycle.
+- A Directed Graph that does not contain any cycle.
+- 
 ![image](https://github.com/user-attachments/assets/2acd7854-4b39-4c58-8797-53bb82cdd30b)
 
 ### 13.Weighted Graph:
