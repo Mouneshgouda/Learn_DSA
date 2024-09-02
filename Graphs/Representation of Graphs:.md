@@ -5,7 +5,7 @@
 
 ### 1.Adjacency Matrix/ Sequential representation:
 
--In this method, the graph is stored in the form of the 2D matrix where rows and columns denote vertices. Each entry in the matrix represents  the weight of the 
+- In this method, the graph is stored in the form of the 2D matrix where rows and columns denote vertices. Each entry in the matrix represents  the weight of the 
  edge between those vertices.
 
 ![image](https://github.com/user-attachments/assets/1710f727-5bfe-4708-9bd0-24aa2e42991f)
@@ -69,7 +69,7 @@ int main() {
 ```
 
 # Adjacency List/ Linked list representation:
--This graph is represented as a collection of linked lists. There is an array of pointer which points to the edges connected to that vertex.
+- This graph is represented as a collection of linked lists. There is an array of pointer which points to the edges connected to that vertex.
 
 ![image](https://github.com/user-attachments/assets/79b4946d-e721-4d0e-8fdc-f03137fbf20d)
 
