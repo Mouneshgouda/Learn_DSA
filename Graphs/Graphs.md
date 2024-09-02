@@ -73,7 +73,7 @@
 ![image](https://github.com/user-attachments/assets/2bc811ce-71e8-4d79-8ba1-dfd79dc088fb)
 
 ### 8. Complete Graph
- The graph in which from each node there is an edge to 
+- The graph in which from each node there is an edge to 
 each other node.
 
 ![image](https://github.com/user-attachments/assets/e2b9a35a-d37a-4411-a21d-8ae904c94e2a)
@@ -85,13 +85,13 @@ each other node.
 ![image](https://github.com/user-attachments/assets/80f51926-ba60-4fc4-8daa-16b121d61258)
 
 ### 10. Cyclic Graph
- A graph containing at least one cycle is known as a Cyclic 
+- A graph containing at least one cycle is known as a Cyclic 
 graph.
 
 ![image](https://github.com/user-attachments/assets/05260310-96d2-4e83-85a3-31ed32aad0c9)
 
 ### 11. Directed Acyclic Graph:
- A Directed Graph that does not contain any 
+- A Directed Graph that does not contain any 
 cycle.
 ![image](https://github.com/user-attachments/assets/2acd7854-4b39-4c58-8797-53bb82cdd30b)
 
