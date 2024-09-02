@@ -1056,3 +1056,96 @@ int main() {
     return 0;
 }
 ```
+
+#Binary Search
+```c
+
+// C program to implement iterative Binary Search
+#include <stdio.h>
+
+// An iterative binary search function.
+int binarySearch(int arr[], int low, int high, int x)
+{
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        // Check if x is present at mid
+        if (arr[mid] == x)
+            return mid;
+
+        // If x greater, ignore left half
+        if (arr[mid] < x)
+            low = mid + 1;
+
+        // If x is smaller, ignore right half
+        else
+            high = mid - 1;
+    }
+
+    // If we reach here, then element was not present
+    return -1;
+}
+
+// Driver code
+int main(void)
+{
+    int arr[] = { 2, 3, 4, 10, 40 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int x = 10;
+    int result = binarySearch(arr, 0, n - 1, x);
+   if(result == -1) 
+   printf("Element is not present in array");
+   else
+   printf("Element is present at index %d",result);
+
+}
+```
+# Interpolation Search
+```c
+
+#include <stdio.h>
+
+// Recursive function to perform interpolation search
+int interpolationSearch(int arr[], int lo, int hi, int x) {
+    int pos;
+
+    // Check if the element is within the bounds of the array
+    if (lo <= hi && x >= arr[lo] && x <= arr[hi]) {
+        // Compute the position using interpolation formula
+        pos = lo + (((double)(hi - lo) / (arr[hi] - arr[lo])) * (x - arr[lo]));
+
+        // Check if the element at position pos is the target
+        if (arr[pos] == x)
+            return pos;
+
+        // If x is larger, search in the right subarray
+        if (arr[pos] < x)
+            return interpolationSearch(arr, pos + 1, hi, x);
+
+        // If x is smaller, search in the left subarray
+        if (arr[pos] > x)
+            return interpolationSearch(arr, lo, pos - 1, x);
+    }
+    // Element not found
+    return -1;
+}
+
+// Driver code
+int main() {
+    // Array of items on which search will be conducted
+    int arr[] = {10, 12, 13, 16, 18, 19, 20, 21,
+                 22, 23, 24, 33, 35, 42, 47};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int x = 18; // Element to be searched
+    int index = interpolationSearch(arr, 0, n - 1, x);
+
+    // If element was found
+    if (index != -1)
+        printf("Element found at index %d\n", index);
+    else
+        printf("Element not found.\n");
+
+    return 0;
+}
+```
