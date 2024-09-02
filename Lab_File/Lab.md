@@ -1057,7 +1057,7 @@ int main() {
 }
 ```
 
-#Binary Search
+# Binary Search
 ```c
 
 // C program to implement iterative Binary Search
