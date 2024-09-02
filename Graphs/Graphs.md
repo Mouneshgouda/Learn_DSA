@@ -68,8 +68,8 @@
 ![image](https://github.com/user-attachments/assets/8ed2b171-5a8f-401d-9029-5f5edaa40035)
 
 ### 7. Regular Graph:
-- The graph in which the degree of every vertex is equal to 
- K is called K regular graph.
+- The graph in which the degree of every vertex is equal to  K is called K regular graph.
+
 ![image](https://github.com/user-attachments/assets/2bc811ce-71e8-4d79-8ba1-dfd79dc088fb)
 
 ### 8. Complete Graph
