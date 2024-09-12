@@ -13,59 +13,44 @@
 ### Code For  Adjacency matrix representation
 ```c
 #include <stdio.h>
-#include <stdlib.h>
 
-// Function to create an adjacency matrix
-int** createAdjMatrix(int vertices) {
-    int** adjMatrix = (int**)malloc(vertices * sizeof(int*));
-    for (int i = 0; i < vertices; i++) {
-        adjMatrix[i] = (int*)malloc(vertices * sizeof(int));
-        for (int j = 0; j < vertices; j++) {
-            adjMatrix[i][j] = 0; // Initialize all entries to 0
-        }
-    }
-    return adjMatrix;
-}
+#define MAX_NODES 5
 
 // Function to add an edge to the adjacency matrix
-void addEdge(int** adjMatrix, int src, int dest) {
-    adjMatrix[src][dest] = 1; // For directed graph
-    // adjMatrix[dest][src] = 1; // Uncomment this line for undirected graph
+void addEdge(int graph[MAX_NODES][MAX_NODES], int start, int end) {
+    graph[start][end] = 1;
+    graph[end][start] = 1; // Because it's an undirected graph
 }
 
 // Function to print the adjacency matrix
-void printAdjMatrix(int** adjMatrix, int vertices) {
+void printMatrix(int graph[MAX_NODES][MAX_NODES], int nodes) {
     printf("Adjacency Matrix:\n");
-    for (int i = 0; i < vertices; i++) {
-        for (int j = 0; j < vertices; j++) {
-            printf("%d ", adjMatrix[i][j]);
+    for (int i = 0; i < nodes; i++) {
+        for (int j = 0; j < nodes; j++) {
+            printf("%d ", graph[i][j]);
         }
         printf("\n");
     }
 }
 
-// Main function to demonstrate adjacency matrix operations
 int main() {
-    int vertices = 4; // Number of vertices
-    int** adjMatrix = createAdjMatrix(vertices);
+    int graph[MAX_NODES][MAX_NODES] = {0}; // Initialize the matrix with zeros
+    int nodes = 5;
 
     // Adding edges
-    addEdge(adjMatrix, 0, 1);
-    addEdge(adjMatrix, 0, 2);
-    addEdge(adjMatrix, 1, 2);
-    addEdge(adjMatrix, 2, 3);
+    addEdge(graph, 0, 1);
+    addEdge(graph, 0, 4);
+    addEdge(graph, 1, 2);
+    addEdge(graph, 1, 3);
+    addEdge(graph, 2, 3);
+    addEdge(graph, 3, 4);
 
-    // Printing the adjacency matrix
-    printAdjMatrix(adjMatrix, vertices);
-
-    // Freeing allocated memory
-    for (int i = 0; i < vertices; i++) {
-        free(adjMatrix[i]);
-    }
-    free(adjMatrix);
+    // Print the adjacency matrix
+    printMatrix(graph, nodes);
 
     return 0;
 }
+
 ```
 
 # Adjacency List/ Linked list representation:
